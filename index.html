@@ -122,29 +122,29 @@
         });
 
         calculateButton.addEventListener('click', () => {
-            const mode = modeSelect.value;
-            let results = '';
+                const mode = modeSelect.value;
+                let results = '';
 
-            if (mode === 'otomatis') {
-                const latitude = document.getElementById('latitude').value;
-                const longitude = document.getElementById('longitude').value;
-                const ikhityat = document.getElementById('ikhityat').value;
+                if (mode === 'otomatis') {
+                    const latitude = document.getElementById('latitude').value;
+                    const longitude = document.getElementById('longitude').value;
+                    const ikhityat = document.getElementById('ikhityat').value;
 
-                results = `<div>Lintang Tempat: ${latitude} (format desimal)</div>`;
-                results += `<div>Bujur Tempat: ${longitude} (format desimal)</div>`;
-                results += `<div>Ikhtiyat: ${ikhityat} menit</div>`;
-                results += `<div>Waktu Sholat akan dihitung...</div>`;
+                results = `<div><strong>Lintang Tempat:</strong> ${latitude} (format desimal)</div>`;
+                results += `<div><strong>Bujur Tempat:</strong> ${longitude} (format desimal)</div>`;
+                results += `<div><strong>Ikhtiyat:</strong> ${ikhityat} menit</div>`;
+                results += `<div><strong>Waktu Sholat:</strong> Akan dihitung...</div>`;
             } else {
                 const manualLatitude = document.getElementById('manualLatitude').value;
                 const manualLongitude = document.getElementById('manualLongitude').value;
                 const zonaWaktu = document.getElementById('zonaWaktu').value;
                 const manualEoT = document.getElementById('manualEoT').value;
 
-                results = `<div>Lintang Tempat: ${manualLatitude} (format desimal)</div>`;
-                results += `<div>Bujur Tempat: ${manualLongitude} (format desimal)</div>`;
-                results += `<div>Zona Waktu: ${zonaWaktu}</div>`;
-                results += `<div>Equator of Time: ${manualEoT} menit</div>`;
-                results += `<div>Waktu Sholat akan dihitung...</div>`;
+                results = `<div><strong>Lintang Tempat:</strong> ${manualLatitude} (format desimal)</div>`;
+                results += `<div><strong>Bujur Tempat:</strong> ${manualLongitude} (format desimal)</div>`;
+                results += `<div><strong>Zona Waktu:</strong> ${zonaWaktu}</div>`;
+                results += `<div><strong>Equator of Time:</strong> ${manualEoT} menit</div>`;
+                results += `<div><strong>Waktu Sholat:</strong> Akan dihitung...</div>`;
             }
 
             resultsDiv.innerHTML = results;
