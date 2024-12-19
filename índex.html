@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Waktu Sholat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator Waktu Sholat</h1>
+        <form id="sholatForm">
+            <label for="mode">Mode Input</label>
+            <select id="mode" name="mode">
+                <option value="otomatis">Otomatis</option>
+                <option value="manual">Manual</option>
+            </select>
+
+            <div id="otomatisInput">
+                <label for="latitude">Lintang Tempat (Latitude)</label>
+                <input type="text" id="latitude" name="latitude" placeholder="Contoh: -7.949776">
+
+                <label for="longitude">Bujur Tempat (Longitude)</label>
+                <input type="text" id="longitude" name="longitude" placeholder="Contoh: 112.601711">
+
+                <label for="ikhityat">Ikhtiyat (1-5 Menit)</label>
+                <select id="ikhityat" name="ikhityat">
+                    <option value="1">1 menit</option>
+                    <option value="2">2 menit</option>
+                    <option value="3">3 menit</option>
+                    <option value="4">4 menit</option>
+                    <option value="5">5 menit</option>
+                </select>
+            </div>
+
+            <div id="manualInput" style="display: none;">
+                <label for="manualLatitude">Lintang Tempat (Latitude)</label>
+                <input type="text" id="manualLatitude" name="manualLatitude" placeholder="Contoh: -7.949776">
+
+                <label for="manualLongitude">Bujur Tempat (Longitude)</label>
+                <input type="text" id="manualLongitude" name="manualLongitude" placeholder="Contoh: 112.601711">
+
+                <label for="zonaWaktu">Zona Waktu</label>
+                <select id="zonaWaktu" name="zonaWaktu">
+                    <option value="WIB">WIB</option>
+                    <option value="WITA">WITA</option>
+                    <option value="WIT">WIT</option>
+                </select>
+
+                <label for="manualEoT">Equator of Time (Menit)</label>
+                <input type="text" id="manualEoT" name="manualEoT" placeholder="Masukkan nilai EoT">
+            </div>
+
+            <button type="button" id="calculateButton">Hitung Waktu Sholat</button>
+        </form>
+
+        <div class="results" id="results">
+        </div>
+    </div>
+
+    <script>
+        const modeSelect = document.getElementById('mode');
+        const otomatisInput = document.getElementById('otomatisInput');
+        const manualInput = document.getElementById('manualInput');
+        const calculateButton = document.getElementById('calculateButton');
+        const resultsDiv = document.getElementById('results');
+
+        modeSelect.addEventListener('change', () => {
+            if (modeSelect.value === 'otomatis') {
+                otomatisInput.style.display = 'block';
+                manualInput.style.display = 'none';
+            } else {
+                otomatisInput.style.display = 'none';
+                manualInput.style.display = 'block';
+            }
+        });
+
+        calculateButton.addEventListener('click', () => {
+            const mode = modeSelect.value;
+            let results = '';
+
+            if (mode === 'otomatis') {
+                const latitude = document.getElementById('latitude').value;
+                const longitude = document.getElementById('longitude').value;
+                const ikhityat = document.getElementById('ikhityat').value;
+
+                results = `<div>Lintang Tempat: ${latitude} (format desimal)</div>`;
+                results += `<div>Bujur Tempat: ${longitude} (format desimal)</div>`;
+                results += `<div>Ikhtiyat: ${ikhityat} menit</div>`;
+                results += `<div>Waktu Sholat akan dihitung...</div>`;
+            } else {
+                const manualLatitude = document.getElementById('manualLatitude').value;
+                const manualLongitude = document.getElementById('manualLongitude').value;
+                const zonaWaktu = document.getElementById('zonaWaktu').value;
+                const manualEoT = document.getElementById('manualEoT').value;
+
+                results = `<div>Lintang Tempat: ${manualLatitude} (format desimal)</div>`;
+                results += `<div>Bujur Tempat: ${manualLongitude} (format desimal)</div>`;
+                results += `<div>Zona Waktu: ${zonaWaktu}</div>`;
+                results += `<div>Equator of Time: ${manualEoT} menit</div>`;
+                results += `<div>Waktu Sholat akan dihitung...</div>`;
+            }
+
+            resultsDiv.innerHTML = results;
+        });
+    </script>
+</body>
+</html>
